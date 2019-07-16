@@ -1,0 +1,84 @@
+server:
+     port: 9999
+# beetl:模板引擎
+beetl:
+  templatesPath: /templates/
+#静态资源
+#constant:
+  #language: {messages_CN: 汉语,messages_US: 英语}
+# spring框架配置
+spring:
+  #application:
+  #  name: yuanpeng-photo-business
+  datasource:
+    username: root
+    password: lzfyp0603
+    driver-class-name: com.mysql.cj.jdbc.Driver  # mysql8.0以后使用com.mysql.cj.jdbc.Driver  com.mysql.jdbc.Driver
+    #其实这个问题是由于MySQL 这个jar 包依赖类型默认是runtime ，
+    #也就是说只有运行时生效，所以虽然这里报错，但是不影响你代码运行。(将runtime 修改为Compile 即可:https://blog.csdn.net/hadues/article/details/82354658)
+
+    url: jdbc:mysql://localhost:3306/customer_manage?useUnicode=true&characterEncoding=utf8&serverTimezone=Hongkong&useSSL=false
+    type: com.alibaba.druid.pool.DruidDataSource  # 使用Druid数据源
+    #druid连接池配置
+    druid:
+      initial-size: 8  # 初始化大小
+      min-idle: 3  # 最小
+      max-active: 20  # 最大
+      max-wait: 60000  # 连接超时时间
+      time-between-eviction-runs-millis: 60000  # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      min-evictable-idle-time-millis: 300000  # 指定一个空闲连接最少空闲多久后可被清除，单位是毫秒
+      validationQuery: SELECT 1 FROM DUAL
+      test-while-idle: true  # 当连接空闲时，是否执行连接测试
+      test-on-borrow: false  # 当从连接池借用连接时，是否测试该连接
+      test-on-return: false  # 在连接归还到连接池时是否测试该连接
+      filters: config,wall,stat  # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 20
+      maxOpenPreparedStatements: 20
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+      #web-stat-filter: #配置web监控的filter
+       # enabled: true
+        #url-pattern: /* #拦截所有请求
+        #exclusions: /druid/*,*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico #不拦截请求
+        #session-stat-enable: true
+        #session-stat-max-count: 10
+      #stat-view-servlet: #配置管理后台
+          #enabled: true
+       #   url-pattern: /druid/*
+          #reset-enable: true #是否禁用HTML页面上的“Reset All”功能
+      #    login-username: admin
+      #    login-password: admin
+          #allow: localhost #白名单不写默认所有访问
+      #    deny: 127.0.0.1 #黑名单
+#mybatis数据库框架配置
+mybatis:
+  # 指定全局配置文件位置
+  config-location: classpath:mybatis/mybatis-config.xml
+  # 指定sql映射文件位置
+  mapper-locations: classpath:mybatis/mapper/*.xml
+
+#SpringBoot底层也是使用slf4j+logback的方式进行日志记录
+#日志配置 org.springframework.boot.logging.logback   有配置文件这里配置无用
+logging:
+  level:
+    com:
+      yuanpeng:
+  #输出到文件:当前项目下生成springboot.log日志,不指定路径在当前项目下生成日志,可以指定具体路径:C:/springboot.log
+  file: springboot.log
+  #在当前磁盘下的路径下创建spring文件夹和log文件夹,使用spring.log当做默认文件file与path冲突
+  #path: /spring/log
+  pattern:
+    #日志输出格式：
+      # %d表示日期时间，
+      # %thread表示线程名，
+      # %-5level：级别从左显示5个字符宽度
+      # %logger{50} 表示logger名字最长50个字符，否则按照句点分割。
+      # %msg：日志消息，
+      # %n是换行符
+    #在控制台输出的日志格式
+    console: ' %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n'
+    #在指定文件中输出日志的格式
+    #file: '%d{HH:mm:ss.SSS} %contextName [%thread] %-5level %logger{36} - %msg%n'
+
+
+
