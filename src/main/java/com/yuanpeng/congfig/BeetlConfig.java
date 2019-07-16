@@ -54,6 +54,7 @@ public class BeetlConfig {
             System.out.println("key= " + entry.getKey() + " and value= " + entry.getValue());
             shared.put(entry.getKey(),entry.getValue());
         }
+        //测试
         shared.put("blogSiteTitle",templatesPath);
         gt.setSharedVars(shared);
         return gt;
