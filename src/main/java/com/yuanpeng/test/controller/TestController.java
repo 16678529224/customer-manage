@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.net.URL;
 import java.util.*;
@@ -40,7 +41,7 @@ public class TestController {
         ModelAndView modelAndView = new ModelAndView();
 
         /*Thread.currentThread().getContextClassLoader();
-        URL url = Thread.currentThread().getContextClassLoader().getResource("/static/messages/messages_CN.properties");
+        URL url = Thread.currentThread().getContextClassLoader().getResource("/static/messages/messages_zh_CN.properties");
         String urlStr=url.getPath();*/
         Properties props = new Properties();
         Map<String,String> map = new HashMap<>();
@@ -65,7 +66,7 @@ public class TestController {
         modelAndView.setViewName("test");
         return modelAndView;
     }
-    @GetMapping({"/","/beetl"})
+    @GetMapping({"/as","/beetl"})
     public String beetl(Model model){
         model.addAttribute("email","测试一下");
         return "test";
@@ -95,5 +96,16 @@ public class TestController {
         // model.addAttribute("email","测试一下");
         return "home/homepage2";
     }
+    @GetMapping("/test8")
+    public String test8(Model model,HttpServletRequest request){
 
+         model.addAttribute("email","测试aa一下");
+        return "test";
+    }
+    @GetMapping("/test9")
+    public String test9(Model model,HttpServletRequest request){
+        request.getSession().setAttribute("l","en_US");
+        model.addAttribute("email","测试aa一下");
+        return "test";
+    }
 }

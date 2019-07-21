@@ -1,26 +1,30 @@
 package com.yuanpeng.login.controller;
 
 import com.yuanpeng.congfig.RandomValidateCodeUtil;
+import com.yuanpeng.congfig.Res;
+import com.yuanpeng.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import sun.misc.BASE64Decoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 @Controller
 @RequestMapping("login")
 public class LoginController {
 
     private final static Logger logger = LoggerFactory.getLogger(LoginController.class);
-    @GetMapping("/")
+   /* @GetMapping("/")
     public String login(Model model){
         model.addAttribute("email","测试一下");
         return "login/login";
-    }
+    }*/
     @GetMapping("/forget")
     public String forget(Model model){
         model.addAttribute("email","测试一下");
@@ -70,5 +74,20 @@ public class LoginController {
             return false;
         }
     }
+    @ResponseBody
+    @PostMapping(value = "/login")
+    public Res login(@ModelAttribute User user) {
+        BASE64Decoder decoder = new BASE64Decoder();
+        try {
+            String usename = new String(decoder.decodeBuffer(user.getName()), "UTF-8");
+            String pasword = new String(decoder.decodeBuffer(user.getUser()), "UTF-8");
+            logger.info("username=="+usename+"---------------password=="+pasword);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+        logger.info("username=="+user.getName()+"---------------password=="+user.getUser());
+                return  new Res();
+    }
+   // public Res login(@RequestParam String username,@RequestParam String password) {
 }

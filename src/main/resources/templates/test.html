@@ -3,11 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script type="text/javascript" src="*[ctxPath]/modules/jquery.min.js"></script>
+
 </head>
 <body>
 <p>*[blogSiteTitle]</p>
 <p>速度快放假</p><!---->
 <p>*[email]</p>
+<p>*[i18n('login.login.title')]</p>
 
+<button type="button" id="butt">Click Me!</button>
+<script>  $("#butt").click(function(event){
+    $.ajax({
+        async: false,
+        type: 'get',
+        url: '*[ctxPath]/test9'
+
+    })
+})
+</script>
 </body>
+
 </html>

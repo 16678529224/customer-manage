@@ -1,13 +1,17 @@
 server:
-     port: 9999
+     port: 9998
 # beetl:模板引擎
 beetl:
   templatesPath: /templates/
+
 #静态资源
 #constant:
   #language: {messages_CN: 汉语,messages_US: 英语}
 # spring框架配置
 spring:
+  #国际化配置文件夹
+  messages:
+    basename: static.messages.messages
   #application:
   #  name: yuanpeng-photo-business
   datasource:
@@ -50,6 +54,7 @@ spring:
       #    login-password: admin
           #allow: localhost #白名单不写默认所有访问
       #    deny: 127.0.0.1 #黑名单
+
 #mybatis数据库框架配置
 mybatis:
   # 指定全局配置文件位置

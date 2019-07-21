@@ -19,12 +19,18 @@
     <div class="layadmin-user-login-main">
       <div class="layadmin-user-login-box layadmin-user-login-header">
         <h2>客户管理平台</h2>
+
         <p>袁鹏出品的客户管理系统</p>
+          @if(isLogin!0 == "1" ){
+          <p style="color:red;padding-top: 28px;">没有权限请先登陆</p>
+          @}
       </div>
+
       <div class="layadmin-user-login-box layadmin-user-login-body layui-form">
+
         <div class="layui-form-item">
           <label class="layadmin-user-login-icon layui-icon layui-icon-username" for="LAY-user-login-username"></label>
-          <input type="text" name="username" id="LAY-user-login-username" lay-verify="required" placeholder="用户名" class="layui-input">
+          <input type="text" name="username" id="LAY-user-login-username" lay-verify="required" placeholder="*[i18n('login.login.title')]" class="layui-input">
         </div>
         <div class="layui-form-item">
           <label class="layadmin-user-login-icon layui-icon layui-icon-password" for="LAY-user-login-password"></label>
@@ -34,7 +40,8 @@
           <div class="layui-row">
             <div class="layui-col-xs7">
               <label class="layadmin-user-login-icon layui-icon layui-icon-vercode" for="LAY-user-login-vercode"></label>
-              <input type="text" name="vercode" id="LAY-user-login-vercode" onblur="aVerify()" lay-verify="required" placeholder="图形验证码" class="layui-input">
+              <input type="text" name="vercode" id="LAY-user-login-vercode"  lay-verify="required" placeholder="图形验证码" class="layui-input">
+                <!--onblur="aVerify()"-->
             </div>
             <div class="layui-col-xs5">
               <div style="margin-left: 10px;">
@@ -49,7 +56,7 @@
           <a href="*[ctxPath]/login/forget" class="layadmin-user-jump-change layadmin-link" style="margin-top: 7px;">忘记密码？</a>
         </div>
         <div class="layui-form-item">
-          <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="LAY-user-login-submit">登 入</button>
+          <button class="layui-btn layui-btn-fluid" onclick="login();" lay-submit lay-filter="LAY-user-login-submit">登 入</button>
         </div>
         <div class="layui-trans layui-form-item layadmin-user-login-other">
           <label>社交账号登入</label>
@@ -89,6 +96,8 @@
 
   <script src="*[ctxPath]/layui/layui.js"></script>
   <script type="text/javascript" src="*[ctxPath]/modules/jquery.min.js"></script>
+  <script type="text/javascript" src="*[ctxPath]/modules/lmt.js"></script>
+  <script type="text/javascript" src="*[ctxPath]/modules/Base64.js"></script>
   <script>
   layui.config({
     base: '*[ctxPath]/' //静态资源所在路径
@@ -105,7 +114,7 @@
     form.render();
 
     //提交
-    form.on('submit(LAY-user-login-submit)', function(obj){
+  /*  form.on('submit(LAY-user-login-submit)', function(obj){
     
       //请求登入接口
       admin.req({
@@ -131,20 +140,71 @@
       });
       
     });
-    
+    */
     
     //实际使用时记得删除该代码
-    layer.msg('为了方便演示，用户名密码可随意输入', {
+    /*layer.msg('为了方便演示，用户名密码可随意输入', {
       offset: '15px'
       ,icon: 10
-    });
+    });*/
     
   });
+ // 登录
+  function login() {
+      var vercode =$("#LAY-user-login-vercode").val();
+      var username =$("#LAY-user-login-username").val();
+      var password =$("#LAY-user-login-password").val();
+      $.ajax({
+          async: false,
+          type: 'post',
+          url: '*[ctxPath]/login/checkVerify',
+          dataType: "json",
+          data: {
+              verifyInput: vercode
+          },
+          success: function (result) {
+              console.log(result);
+              if (result) {
+                  lmt.post({
+                      url: '*[ctxPath]/login/login',
+                      data:{"name":Base64.encode(username),"user":Base64.encode(password)},
+                      success:function(data){
+                          if(data.code == 100){
+                              layer.msg('登录成功!', {
+                                  offset: '15px'
+                                  ,icon: 1
+                              });
+                          }else{
+                              layer.msg('密码错误!', {
+                                  offset: '15px'
+                                  ,icon: 2
+                              });
+                              $("#LAY-user-login-password").val("")
+                          }
+
+                      }
+                  })
+              } else {
+                  layer.msg('验证码错误', {
+                      offset: '15px'
+                      ,icon: 2
+                  });
+              }
+              getVerify();
+          }
+      });
+
+
+
+  }
+  //获取验证图
   function getVerify() {
       // $("#imgCode").on("click", function() {
       $("#imgVerify").attr("src", '*[ctxPath]/login/getVerify?' + Math.random());//jquery方式
       // });
   }
+
+  //进行验证
   function aVerify(){
       var value =$("#LAY-user-login-vercode").val();
       // alert(value);

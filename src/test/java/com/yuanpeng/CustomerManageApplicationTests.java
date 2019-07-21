@@ -83,7 +83,7 @@ public class CustomerManageApplicationTests {
 
         /*这是获取绝对路径D;/xxxxxx
         Thread.currentThread().getContextClassLoader();
-        URL url = Thread.currentThread().getContextClassLoader().getResource("static/messages/messages_CN.properties");
+        URL url = Thread.currentThread().getContextClassLoader().getResource("static/messages/messages_zh_CN.properties");
         String urlStr=url.getPath();*/
         Properties props = new Properties();
         Map<String,String> map = new HashMap<>();

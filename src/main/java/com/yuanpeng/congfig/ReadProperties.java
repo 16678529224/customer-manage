@@ -68,4 +68,10 @@ public class ReadProperties {
 
         return map;
     }
+    //传入properties,以后待开发
+    /*Map<String,String> beetlLanguage  =  readProperties.getLanguageForBeetl("messages_zh_CN.properties");
+        for (Map.Entry<String, String> entry : beetlLanguage.entrySet()) {
+        System.out.println("key= " + entry.getKey() + " and value= " + entry.getValue());
+        shared.put(entry.getKey(),entry.getValue());
+    }*/
 }
