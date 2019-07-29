@@ -1,11 +1,20 @@
-package com.yuanpeng.congfig;
+package com.yuanpeng.BuilderJava;
 
 public enum ResultCode
 {
 	/**
 	 * 请求处理
 	 */
-	SUCCESS(100, "成功"), FAILED(10000, "系统异常"),
+	SUCCESS(100, "成功"),
+	FAILED(10000, "系统异常"),
+    NORMAL_ERROR(-100,"操作失败"),
+    /**
+     * 创建用户
+     */
+    LOGIN_REG_USERNAME(12000,"昵称重复哦!"),
+    LOGIN_REG_MOBILE(12001,"此手机号以注册!"),
+    LOGIN_REG_ERROR(12002,"注册异常请稍后重试!"),
+
 	/**
 	 * 登陆、认证
 	 */
@@ -20,37 +29,8 @@ public enum ResultCode
 	 */
 	TOKEN_EXPIRED(11020, "token过期"), TOKEN_ERROR(11021, "token验证失败"),
 
-	/**
-	 * 操作失败
-	 */
-	NORMAL_ERROR(-100,"操作失败"),
 
-	/**
-	 * 此会员等级下还有会员
-	 */
-	MEMBER_DELETERANK(1200, "此会员等级下还有会员"),
-	/**
-	 * 会员注册手机号验证
-	 */
-	MEMBER_TEL(12001, "此手机号已注册会员"),
-
-	/**
-	 * 查询是否有会员
-	 */
-	MEMBER_NO(12002, "没有此会员"),
-	/**
-	 * 会员充值金额与实际充值金额不符
-	 */
-	MEMBER_MONEY(12003, "会员充值金额与实际充值金额不符"),
-	/**
-	 * 会员注册卡号验证
-	 */
-	MEMBER_CARD(12004, "此卡号已注册会员"),
-	/**
-	 * 此会员等级下还有会员,无法删除
-	 */
-	MEMBER_CHARGEUNEQUAL(12005, "此会员等级下还有会员,无法删除"),
-
+	/*
 	/**
 	 * 订单创建没有桌号
 	 */

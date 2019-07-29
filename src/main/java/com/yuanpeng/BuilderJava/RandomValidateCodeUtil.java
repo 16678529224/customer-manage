@@ -1,4 +1,4 @@
-package com.yuanpeng.congfig;
+package com.yuanpeng.BuilderJava;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +11,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
+/**
+ * 验证码实现类
+ */
 public class RandomValidateCodeUtil {
 
 

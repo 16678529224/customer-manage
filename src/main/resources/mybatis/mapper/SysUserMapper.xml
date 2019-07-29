@@ -2,9 +2,92 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.yuanpeng.test.mapper.TestMapper">
-    <select id="getAllSysUser" resultType="com.yuanpeng.domain.User">
-        SELECT * FROM  sys_user
+<mapper namespace="com.yuanpeng.mapper.SysUserMapper">
+    <!--<sql id="allColums">
+		yp_sys_user.id as id,
+		yp_sys_user.username as username,
+		yp_sys_user.password as password,
+		yp_sys_user.mobile as mobile,
+		yp_sys_user.salt as salt,
+		yp_sys_user.dept_id as deptId,
+		yp_sys_user.status as status,
+		yp_sys_user.created_at as createdAt,
+		yp_sys_user.updated_at as updatedAt,
+		yp_sys_user.del_flag as delFlag
+	</sql>-->
+    <!--<include refid="allColums"/>-->
+    <resultMap id="baseModel" type="com.yuanpeng.domain.SysUser">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="mobile" property="mobile"/>
+        <result column="salt" property="salt"/>
+        <result column="dept_id" property="deptId"/>
+        <result column="status" property="status"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="del_flag" property="delFlag"/>
+    </resultMap>
+    <!--
+    字段注释:
+            id
+            username         : 用户名
+            password         : 密码
+            mobile           : 手机号
+            salt             : 盐值
+            dept_id          : 所属部门
+            status           : 状态(0:锁定 1:正常)
+            created_at
+            updated_at
+            del_flag
+    -->
+    <insert id="insertSysUser" parameterType="com.yuanpeng.domain.SysUser"
+            useGeneratedKeys="true" keyProperty="id" >
+        <!-- oracle等不支持id自增长的，可根据其id生成策略，先获取id
+
+     <selectKey resultType="int" order="BEFORE" keyProperty="id">
+           select seq_user_id.nextval as id from dual
+     </selectKey>
+     -->
+
+
+       insert into yp_sys_user(
+
+       username,
+       password,
+       mobile,
+       salt,
+       dept_id,
+       status,
+       created_at,
+       del_flag
+        )values(
+
+        #{username},
+        #{password},
+        #{mobile},
+        #{salt},
+        000,
+        0,
+        now(),
+        0
+        )
+        
+    </insert>
+    <select id="selcetMobileBySysUserNum" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(*)
+        from yp_sys_user
+        where mobile = #{mobile}
+    </select>
+    <select id="selcetUserNameBySysUserNum" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(*)
+        from   yp_sys_user
+        where  username=#{username}
+    </select>
+    <select id="contrastMobile" resultMap="baseModel">
+        select *
+        from yp_sys_user
+        where mobile = #{mobile}
     </select>
 
 

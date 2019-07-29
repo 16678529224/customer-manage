@@ -1,4 +1,4 @@
-package com.yuanpeng.congfig;
+package com.yuanpeng.BuilderJava;
 
 import com.alibaba.fastjson.JSONObject;
 

@@ -76,7 +76,20 @@
         </dependency>
 
 
+        <!-- Apache工具组件 往下都是组件 .-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-    -->
+        <!--  https://blog.csdn.net/f641385712/article/details/82468927-->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+        <!-- Apache工具组件 往上都是组件 .-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-    -->
+
+
+
     </dependencies>
+
+
+
 
     <build>
         <plugins>

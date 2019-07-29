@@ -12,6 +12,9 @@ spring:
   #国际化配置文件夹
   messages:
     basename: static.messages.messages
+  output:
+    ansi:
+      enabled: always
   #application:
   #  name: yuanpeng-photo-business
   datasource:
@@ -66,10 +69,13 @@ mybatis:
 #日志配置 org.springframework.boot.logging.logback   有配置文件这里配置无用
 logging:
   level:
+    org:
+#      mybatis: debug
+ #   dao: debug
     com:
       yuanpeng:
   #输出到文件:当前项目下生成springboot.log日志,不指定路径在当前项目下生成日志,可以指定具体路径:C:/springboot.log
-  file: springboot.log
+  file:
   #在当前磁盘下的路径下创建spring文件夹和log文件夹,使用spring.log当做默认文件file与path冲突
   #path: /spring/log
   pattern:

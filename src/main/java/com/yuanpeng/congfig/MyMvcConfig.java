@@ -27,7 +27,7 @@ public class MyMvcConfig implements WebMvcConfigurer {
             @Override
             public void addViewControllers(ViewControllerRegistry registry) {
                 registry.addViewController("/login").setViewName("login/login");
-
+                registry.addViewController("/").setViewName("login/login");
             }
             //注册拦截器
 
@@ -37,7 +37,7 @@ public class MyMvcConfig implements WebMvcConfigurer {
                 //静态资源；  *.css , *.js
                 //SpringBoot已经做好了静态资源映射
                 registry.addInterceptor(new MvcHandlerInterceptor()).addPathPatterns("/**").
-                        excludePathPatterns("/login/*","/login",
+                        excludePathPatterns("/login/*","/login","/",
                                             "/**/*.js","/**/*.css",
                                             "/**/*.woff","/**/*.ttf"
                                             );

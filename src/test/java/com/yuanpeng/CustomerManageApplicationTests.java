@@ -1,6 +1,10 @@
 package com.yuanpeng;
 
+import com.yuanpeng.BuilderJava.DateUtils;
 import com.yuanpeng.congfig.ReadProperties;
+import com.yuanpeng.domain.SysUser;
+import com.yuanpeng.service.SysUserService;
+import jdk.nashorn.internal.ir.annotations.Reference;
 import net.bytebuddy.asm.Advice;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,6 +19,7 @@ import java.io.*;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.*;
 
 @RunWith(SpringRunner.class)
@@ -26,6 +31,8 @@ public class CustomerManageApplicationTests {
     DataSource dataSource;
     @Autowired
     ReadProperties readProperties;
+    @Autowired
+    SysUserService sysUserService;
     @Test
     public void contextLoads() {
     }
@@ -115,5 +122,21 @@ public class CustomerManageApplicationTests {
     public void test6() {
 
         System.out.println( readProperties.toString());
+    }
+    @Test
+    public void test7() {
+        SysUser sysUser = sysUserService.contrastMobile("166785292224");
+        logger.info(sysUser.getUsername());
+        logger.debug("阿薩德");
+    }
+    @Test
+    public void test8() {
+        Date weekStart = DateUtils.getWeekEnd(new Date());
+        String reqDate = DateUtils.getReqDate(weekStart);
+        String timeStampStr = DateUtils.getTimeStampStr(weekStart);
+        Timestamp timestamp = DateUtils.nowTimeStamp();
+        long time = weekStart.getTime();
+        System.out.println(reqDate+":------------:"+weekStart+":------:"+timeStampStr +":------:"+timestamp+":------:"+time);
+
     }
 }

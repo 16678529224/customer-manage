@@ -6,6 +6,9 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * 拦截器,拦截所有访问路径,判断是否登录
+ */
 public class MvcHandlerInterceptor implements HandlerInterceptor  {
     //目标方法执行之前
     @Override
