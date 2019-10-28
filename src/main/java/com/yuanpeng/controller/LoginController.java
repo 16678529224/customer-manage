@@ -138,6 +138,13 @@ public class LoginController {
         }
         return new Res(ResultCode.FAILED);
     }
+
+    /**
+     * 语言选择
+     * @param lang
+     * @param request
+     * @return
+     */
     @ResponseBody
     @GetMapping("/language")
     public Res language(@RequestParam String lang,HttpServletRequest request){

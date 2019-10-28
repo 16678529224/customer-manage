@@ -9,12 +9,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-@RequestMapping("index")
-public class IndexController {
-    @GetMapping("/index")
-    public String index(Model model, HttpServletRequest request){
-        SysUser user = (SysUser)request.getSession().getAttribute("loginUser");
-        model.addAttribute("loginName",user.getUsername());
-        return "index/index";
+@RequestMapping("user")
+public class UserController {
+    @GetMapping("/list/index")
+    public String listIndex(Model model, HttpServletRequest request){
+        return "user/list";
     }
+    @GetMapping("/userform/index")
+    public String userformIndex(Model model, HttpServletRequest request){
+        return "user/userform";
+    }
+
+
+
 }

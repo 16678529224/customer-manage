@@ -61,6 +61,7 @@ public class BeetlConfig {
         gt.setSharedVars(shared);
         // 注册国家化函数
         gt.registerFunction("i18n", new I18nFunction(wac));
+
         return gt;
     }
 
