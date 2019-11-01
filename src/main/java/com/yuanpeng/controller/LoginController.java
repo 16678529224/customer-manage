@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 
@@ -95,7 +96,11 @@ public class LoginController {
     @PostMapping(value = "/login")
     public Res login(@ModelAttribute SysUser sysUser,HttpServletRequest request) {
         BASE64Decoder decoder = new BASE64Decoder();
+        InetAddress addr;
         try {
+            addr = InetAddress.getLocalHost();
+            String s = addr.getHostAddress();
+
             String monile = new String(decoder.decodeBuffer(sysUser.getMobile()), "UTF-8");
             sysUser.setMobile(monile);
             String password = new String(decoder.decodeBuffer(sysUser.getPassword()), "UTF-8");
