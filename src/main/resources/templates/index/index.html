@@ -105,9 +105,11 @@
                 <dd data-name="console" class="layui-this">
                   <a lay-href="*[ctxPath]/home/console/index">控制台</a>
                 </dd>
+                  @if(so.hasPermission("index:index")){
                 <dd data-name="console" >
                   <a lay-href="*[ctxPath]/home/homepage1/index">主页一</a>
                 </dd>
+                  @}
                 <dd data-name="console">
                   <a lay-href="*[ctxPath]/home/homepage2/index  ">主页二</a>
                 </dd>

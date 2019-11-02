@@ -1,6 +1,7 @@
 package com.yuanpeng.congfig;
 
 
+import com.yuanpeng.shiro.ShiroExt;
 import org.beetl.core.Context;
 import org.beetl.core.Function;
 import org.beetl.core.GroupTemplate;
@@ -61,7 +62,8 @@ public class BeetlConfig {
         gt.setSharedVars(shared);
         // 注册国家化函数
         gt.registerFunction("i18n", new I18nFunction(wac));
-
+        //注册shiro
+        gt.registerFunctionPackage("so", new ShiroExt());
         return gt;
     }
 
@@ -79,6 +81,8 @@ public class BeetlConfig {
         }
 
     }
+
+
 
 
 }

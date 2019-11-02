@@ -43,13 +43,15 @@ public class ShiroConfig {
         filterMap.put("/druid","anon");
         filterMap.put("/druid/*","anon");
 
-        filterMap.put("/index/*","authc");
-        filterMap.put("/*","authc");
+
+        filterMap.put("/**","authc");
 
         filterMap.put("/home/homepage1/index", "perms[index:index]");
 
         //修改拦截后跳转页面
         shiroFilterFactoryBean.setLoginUrl("/");
+        //设置未授权提示页面
+        //shiroFilterFactoryBean.setUnauthorizedUrl("/noAuth");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
 
 
