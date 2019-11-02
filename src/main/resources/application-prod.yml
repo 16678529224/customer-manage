@@ -60,6 +60,9 @@ spring:
 
 #mybatis数据库框架配置
 mybatis:
+
+  #不用这样resultType="com.yuanpeng.domain.User"  直接写class名自动扫描
+  type-aliases-package: com.yuanpeng.domain
   # 指定全局配置文件位置
   config-location: classpath:mybatis/mybatis-config.xml
   # 指定sql映射文件位置

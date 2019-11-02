@@ -8,12 +8,13 @@ public class SysUser extends BaseEntity
 	private static final long serialVersionUID = 1L;
 
 	//@TableId(value = "id", type = IdType.AUTO)
-	private Integer id;
+	private String id;
 	private String username;//用户名
 	private String password;//密码
 	private String mobile;//手机号
 	private String salt;//盐值
-	//@TableField("dept_id")
+    private String nickname;//昵称
+    //@TableField("dept_id")
 	private Integer deptId;//所属部门
 	private Integer status;//状态(0:正常 1:锁定)
 	//@TableField(value = "created_at", fill = FieldFill.INSERT) //创建时间
@@ -50,11 +51,11 @@ public class SysUser extends BaseEntity
 		Integer NORMAL = 1;
 	}
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -128,5 +129,12 @@ public class SysUser extends BaseEntity
 
     public void setDelFlag(Integer delFlag) {
         this.delFlag = delFlag;
+    }
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 }

@@ -19,11 +19,12 @@ public enum ResultCode
 	 * 登陆、认证
 	 */
 	FAILED_LOGIN(11000, "未登录或已过期,请重新登陆.."),
-	FAILED_LOGIN_INCORRECTCREDENTIALS(11010, "用户名或密码错误"),
+	FAILED_LOGIN_INCORRECTCREDENTIALS(11010, "密码错误"),
 	FAILED_AUTHORIZED(11011, "无操作权限,请联系管理员进行授权."),
 	FAILED_LOGIN_CAPTCHA(11012, "验证码错误"),
 	FAILED_LOGIN_INVALID_ACCOUNT(11013, "账号不存在或已被锁定"),
 	FAILED_LOGIN_HAD_NO_SHOP (11014,"当前用户名下无商铺信息") ,
+	FAILED_LOGIN_NO_USERNAME(11015, "没有此用户,请先注册后登陆."),
 	/**
 	 * token异常
 	 */

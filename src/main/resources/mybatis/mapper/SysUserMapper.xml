@@ -27,6 +27,8 @@
         <result column="created_at" property="createdAt"/>
         <result column="updated_at" property="updatedAt"/>
         <result column="del_flag" property="delFlag"/>
+        <result column="nickname" property="nickname"/>
+
     </resultMap>
     <!--
     字段注释:
@@ -41,8 +43,8 @@
             updated_at
             del_flag
     -->
-    <insert id="insertSysUser" parameterType="com.yuanpeng.domain.SysUser"
-            useGeneratedKeys="true" keyProperty="id" >
+   <!-- <insert id="insertSysUser" parameterType="com.yuanpeng.domain.SysUser"
+            useGeneratedKeys="true" keyProperty="id" >-->
         <!-- oracle等不支持id自增长的，可根据其id生成策略，先获取id
 
      <selectKey resultType="int" order="BEFORE" keyProperty="id">
@@ -50,9 +52,9 @@
      </selectKey>
      -->
 
-
+    <insert id="insertSysUser" parameterType="SysUser">
        insert into yp_sys_user(
-
+        id,
        username,
        password,
        mobile,
@@ -60,9 +62,10 @@
        dept_id,
        status,
        created_at,
-       del_flag
+       del_flag,
+        nickname
         )values(
-
+        #{id},
         #{username},
         #{password},
         #{mobile},
@@ -70,7 +73,8 @@
         000,
         0,
         now(),
-        0
+        0,
+        #{nickname}
         )
         
     </insert>
@@ -90,5 +94,10 @@
         where mobile = #{mobile}
     </select>
 
+    <select id="contrastUserName" resultMap="baseModel">
+        select *
+        from yp_sys_user
+        where username = #{username}
+    </select>
 
 </mapper>

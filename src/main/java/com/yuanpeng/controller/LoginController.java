@@ -1,12 +1,14 @@
 package com.yuanpeng.controller;
 
-import com.yuanpeng.BuilderJava.PasswordEncryption;
-import com.yuanpeng.BuilderJava.RandomValidateCodeUtil;
-import com.yuanpeng.BuilderJava.Res;
-import com.yuanpeng.BuilderJava.ResultCode;
+import com.yuanpeng.BuilderJava.*;
 import com.yuanpeng.domain.SysUser;
 import com.yuanpeng.domain.User;
 import com.yuanpeng.service.SysUserService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("login")
@@ -44,7 +47,7 @@ public class LoginController {
     @GetMapping("/loginReg")
     public String loginReg(Model model){
         model.addAttribute("email","测试一下");
-        model.addAttribute("isLogin","100");
+        model.addAttribute("isLogin","1");
         return "login/login";
     }
     /**
@@ -94,25 +97,45 @@ public class LoginController {
      */
     @ResponseBody
     @PostMapping(value = "/login")
-    public Res login(@ModelAttribute SysUser sysUser,HttpServletRequest request) {
+    public Res login(@ModelAttribute SysUser sysUser,HttpServletRequest request,Model model) {
+
         BASE64Decoder decoder = new BASE64Decoder();
-        InetAddress addr;
+        String username = null;
+        String password = null;
         try {
-            addr = InetAddress.getLocalHost();
-            String s = addr.getHostAddress();
-
-            String monile = new String(decoder.decodeBuffer(sysUser.getMobile()), "UTF-8");
-            sysUser.setMobile(monile);
-            String password = new String(decoder.decodeBuffer(sysUser.getPassword()), "UTF-8");
-            sysUser.setPassword(password);
-
-            Res res = sysUserService.login(sysUser,request);
-            return  res;
+            username = new String(decoder.decodeBuffer(sysUser.getUsername()), "UTF-8");
+            password = new String(decoder.decodeBuffer(sysUser.getPassword()), "UTF-8");
         } catch (IOException e) {
             e.printStackTrace();
+            return new Res(ResultCode.FAILED);
         }
 
-        return new Res(ResultCode.FAILED);
+        /**
+         * 使用Shiro编写认证操作
+         */
+        //1.获取Subject
+        Subject subject = SecurityUtils.getSubject();
+        //2.封装用户数据
+        UsernamePasswordToken token = new UsernamePasswordToken(username,password);
+        //3.执行登录方法
+        try {
+            subject.login(token);//直接到UserRealm
+            //登录成功
+            //跳转到test.html
+            return new Res(ResultCode.SUCCESS);
+        } catch (UnknownAccountException e) {
+            //e.printStackTrace();
+            //登录失败:用户名不存在
+            //model.addAttribute("msg", "用户名不存在");
+            return new Res(ResultCode.FAILED_LOGIN_NO_USERNAME);
+        }catch (IncorrectCredentialsException e) {
+            //e.printStackTrace();
+            //登录失败:密码错误
+            //model.addAttribute("msg", "密码错误");
+            return new Res(ResultCode.FAILED_LOGIN_INCORRECTCREDENTIALS);
+        }
+             /* Res res = sysUserService.login(sysUser,request);
+            return  res;*/
     }
     /**
      * 创建账户
@@ -121,7 +144,9 @@ public class LoginController {
     @PostMapping(value = "/saveSysUser")
     public Res saveSysUser(@ModelAttribute SysUser sysUser) {
         BASE64Decoder decoder = new BASE64Decoder();
+
         try {
+            sysUser.setId(ToolUtils.getUuid());
             String usename = new String(decoder.decodeBuffer(sysUser.getUsername()), "UTF-8");
             sysUser.setUsername(usename);
             String password = new String(decoder.decodeBuffer(sysUser.getPassword()), "UTF-8");
@@ -129,9 +154,7 @@ public class LoginController {
             String ciphertext = PasswordEncryption.getEncryptedPassword(password, salt);//密文
             sysUser.setSalt(salt);
             sysUser.setPassword(ciphertext);
-           // sysUser.setId(456);
             Res res = sysUserService.saveSysUser(sysUser);
-
             logger.debug("username=="+usename+"--------salt=="+salt+"--------ciphertext=="+ciphertext);
             return res;
         } catch (IOException e) {
@@ -141,7 +164,7 @@ public class LoginController {
         } catch (InvalidKeySpecException e) {
             e.printStackTrace();
         }
-        return new Res(ResultCode.FAILED);
+        return new Res(ResultCode.LOGIN_REG_ERROR);
     }
 
     /**

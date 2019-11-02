@@ -14,7 +14,7 @@ public class IndexController {
     @GetMapping("/index")
     public String index(Model model, HttpServletRequest request){
         SysUser user = (SysUser)request.getSession().getAttribute("loginUser");
-        model.addAttribute("loginName",user.getUsername());
+        model.addAttribute("loginName","阿萨德");
         return "index/index";
     }
 }

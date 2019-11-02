@@ -24,7 +24,7 @@ debug：当此属性设置为true时，将打印出logback内部日志信息，�
         -->
         <layout class="ch.qos.logback.classic.PatternLayout">
             <springProfile name="prod">
-               <pattern>%boldCyan(%date{yyyy-MM-dd HH:mm:ss}) [%highlight(%-5level)]-[%thread]-%green(%logger:%line)-[%file] %n &#45;&#45; %magenta(%msg%n) </pattern>
+               <pattern>%boldCyan(%date{yyyy-MM-dd HH:mm:ss}) [%highlight(%-5level)]-[%thread]-%magenta(%logger:%line)-[%file] %n &#45;&#45; %green(%msg%n) </pattern>
 
             </springProfile>
             <springProfile name="dev">
@@ -194,7 +194,7 @@ debug：当此属性设置为true时，将打印出logback内部日志信息，�
     root与logger是父子关系，没有特别定义则默认为root，任何一个类只会和一个logger对应，
     要么是定义的logger，要么是root，判断的关键在于找到这个logger，然后判断这个logger的appender和level。
     -->
-    <root level="INFO">
+    <root level="debug">
         <appender-ref ref="stdout" />
         <appender-ref ref="appLogAppender" />
         <appender-ref ref="DEBUG_FILE" />

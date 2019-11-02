@@ -169,7 +169,7 @@
               if (result) {
                   lmt.post({
                       url: '*[ctxPath]/login/login',
-                      data:{"mobile":Base64.encode(username),"password":Base64.encode(password)},
+                      data:{"password":Base64.encode(password),"username":Base64.encode(username)},
                       success:function(data){
                           if(data.code == 100){
 

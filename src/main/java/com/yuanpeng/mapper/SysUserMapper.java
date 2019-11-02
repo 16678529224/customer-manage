@@ -2,7 +2,9 @@ package com.yuanpeng.mapper;
 
 import com.yuanpeng.domain.SysUser;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
+@Repository
 @Mapper
 public interface SysUserMapper
 {
@@ -12,8 +14,8 @@ public interface SysUserMapper
     Integer selcetMobileBySysUserNum(String mobile);
     //根据手机号查有几个用户
     Integer selcetUserNameBySysUserNum(String username);
-
 	//根据手机号查用户
 	SysUser contrastMobile(SysUser sysUser);
-
+    //根据用户名查用户
+    SysUser contrastUserName(String username);
 }

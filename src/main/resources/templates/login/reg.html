@@ -23,10 +23,14 @@
       </div>
       <div class="layadmin-user-login-box layadmin-user-login-body layui-form">
         <div class="layui-form-item">
+          <label class="layadmin-user-login-icon layui-icon layui-icon-username" for="LAY-user-login-username"></label>
+          <input type="text" name="username" id="LAY-user-login-username" lay-verify="username" placeholder="登录用户名" class="layui-input">
+        </div>
+        <div class="layui-form-item">
           <label class="layadmin-user-login-icon layui-icon layui-icon-cellphone" for="LAY-user-login-cellphone"></label>
           <input type="text" name="cellphone" id="LAY-user-login-cellphone" lay-verify="phone" placeholder="手机" class="layui-input">
         </div>
-        <!--<div class="layui-form-item">
+        <div class="layui-form-item">
           <div class="layui-row">
             <div class="layui-col-xs7">
               <label class="layadmin-user-login-icon layui-icon layui-icon-vercode" for="LAY-user-login-vercode"></label>
@@ -38,7 +42,7 @@
               </div>
             </div>
           </div>
-        </div>-->
+        </div>
         <div class="layui-form-item">
           <label class="layadmin-user-login-icon layui-icon layui-icon-password" for="LAY-user-login-password"></label>
           <input type="password" name="password" id="LAY-user-login-password" lay-verify="pass" placeholder="密码" class="layui-input">
@@ -129,7 +133,7 @@
       });*/
         lmt.post({
             url: '*[ctxPath]/login/saveSysUser',
-            data:{"username":Base64.encode(field.nickname),"password":Base64.encode(field.password),"mobile":field.cellphone},
+            data:{"username":Base64.encode(field.username),"password":Base64.encode(field.password),"mobile":field.cellphone,"nickname":field.nickname},
             success:function(data){
                 if(data.code == 100){
 
