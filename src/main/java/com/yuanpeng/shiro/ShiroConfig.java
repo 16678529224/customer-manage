@@ -42,12 +42,14 @@ public class ShiroConfig {
         filterMap.put("/","anon");
         filterMap.put("/druid","anon");
         filterMap.put("/druid/*","anon");
+        filterMap.put("/shiro/logout","logout");
+
+
+
+        filterMap.put("/home/homepage1/index", "perms[index:index]");//页面拦截可以不显示页面但是路径还是能进去所以要拦截所有路径
 
 
         filterMap.put("/**","authc");
-
-        filterMap.put("/home/homepage1/index", "perms[index:index]");
-
         //修改拦截后跳转页面
         shiroFilterFactoryBean.setLoginUrl("/");
         //设置未授权提示页面

@@ -22,10 +22,9 @@
         <result column="password" property="password"/>
         <result column="mobile" property="mobile"/>
         <result column="salt" property="salt"/>
-        <result column="dept_id" property="deptId"/>
         <result column="status" property="status"/>
-        <result column="created_at" property="createdAt"/>
-        <result column="updated_at" property="updatedAt"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
         <result column="del_flag" property="delFlag"/>
         <result column="nickname" property="nickname"/>
 
@@ -59,9 +58,9 @@
        password,
        mobile,
        salt,
-       dept_id,
+
        status,
-       created_at,
+       create_time,
        del_flag,
         nickname
         )values(
@@ -70,7 +69,7 @@
         #{password},
         #{mobile},
         #{salt},
-        000,
+
         0,
         now(),
         0,

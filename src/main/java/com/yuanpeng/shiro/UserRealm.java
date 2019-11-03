@@ -66,6 +66,10 @@ public class UserRealm extends AuthorizingRealm {
             //用户名不存在
             return null;//shiro底层会抛出UnKnowAccountException
         }
+        if(sysUser.getStatus() == 1){
+
+            throw new LockedAccountException();
+        }
         //2.判断密码
         String  password  =  String.valueOf(token.getPassword());
         String encryptedAttemptedPassword =null;
@@ -79,6 +83,6 @@ public class UserRealm extends AuthorizingRealm {
         }
 
         logger.debug("加密后的密码========"+encryptedAttemptedPassword);
-        return new SimpleAuthenticationInfo(sysUser,sysUser.getPassword(),"");
+        return new SimpleAuthenticationInfo(sysUser,sysUser.getPassword(),getName());
     }
 }

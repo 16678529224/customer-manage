@@ -6,6 +6,7 @@ import com.yuanpeng.domain.User;
 import com.yuanpeng.service.SysUserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
@@ -133,9 +134,10 @@ public class LoginController {
             //登录失败:密码错误
             //model.addAttribute("msg", "密码错误");
             return new Res(ResultCode.FAILED_LOGIN_INCORRECTCREDENTIALS);
+        }catch (LockedAccountException e){
+            return new Res(ResultCode.FAILED_LOGIN_SUODING);
         }
-             /* Res res = sysUserService.login(sysUser,request);
-            return  res;*/
+
     }
     /**
      * 创建账户

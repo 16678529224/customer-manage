@@ -25,6 +25,7 @@ public enum ResultCode
 	FAILED_LOGIN_INVALID_ACCOUNT(11013, "账号不存在或已被锁定"),
 	FAILED_LOGIN_HAD_NO_SHOP (11014,"当前用户名下无商铺信息") ,
 	FAILED_LOGIN_NO_USERNAME(11015, "没有此用户,请先注册后登陆."),
+    FAILED_LOGIN_SUODING(11016, "用户被锁定."),
 	/**
 	 * token异常
 	 */

@@ -14,16 +14,15 @@ public class SysUser extends BaseEntity
 	private String mobile;//手机号
 	private String salt;//盐值
     private String nickname;//昵称
-    //@TableField("dept_id")
-	private Integer deptId;//所属部门
+
 	private Integer status;//状态(0:正常 1:锁定)
 	//@TableField(value = "created_at", fill = FieldFill.INSERT) //创建时间
-	private String createdAt;
+	private String createTime;
 	//@TableField(value = "updated_at", fill = FieldFill.UPDATE) //最后更新时间
-	private String updatedAt;
+	private String updateTime;
 	//@TableLogic //逻辑删除标记(0 未删除 1 已删除)
 	//@TableField("del_flag")
-	private Integer delFlag;
+	private Integer delFlag;//逻辑删除标记(0 未删除 1 已删除) 
 
 	//@TableField(exist = false)
 	//private List<SysRole> roles;
@@ -91,13 +90,7 @@ public class SysUser extends BaseEntity
         this.salt = salt;
     }
 
-    public Integer getDeptId() {
-        return deptId;
-    }
 
-    public void setDeptId(Integer deptId) {
-        this.deptId = deptId;
-    }
 
     public Integer getStatus() {
         return status;
@@ -107,20 +100,20 @@ public class SysUser extends BaseEntity
         this.status = status;
     }
 
-    public String getCreatedAt() {
-        return createdAt;
+    public String getCreateTime() {
+        return createTime;
     }
 
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
     }
 
-    public String getUpdatedAt() {
-        return updatedAt;
+    public String getUpdateTime() {
+        return updateTime;
     }
 
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setUpdateTime(String updateTime) {
+        this.updateTime = updateTime;
     }
 
     public Integer getDelFlag() {
