@@ -1,8 +1,7 @@
-package com.yuanpeng.shiro;
+package com.yuanpeng.congfig.shiro;
 
 import com.yuanpeng.BuilderJava.PasswordEncryption;
 import com.yuanpeng.domain.SysUser;
-import com.yuanpeng.domain.User;
 import com.yuanpeng.mapper.SysUserMapper;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;

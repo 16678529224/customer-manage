@@ -1,4 +1,4 @@
-package com.yuanpeng.shiro;
+package com.yuanpeng.congfig.shiro;
 
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;

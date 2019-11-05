@@ -1,4 +1,4 @@
-package com.yuanpeng.shiro;
+package com.yuanpeng.congfig.shiro;
 
 
 import java.beans.BeanInfo;

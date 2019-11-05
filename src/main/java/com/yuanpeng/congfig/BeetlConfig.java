@@ -1,7 +1,7 @@
 package com.yuanpeng.congfig;
 
 
-import com.yuanpeng.shiro.ShiroExt;
+import com.yuanpeng.congfig.shiro.ShiroExt;
 import org.beetl.core.Context;
 import org.beetl.core.Function;
 import org.beetl.core.GroupTemplate;
@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
+import com.baomidou.mybatisplus.generator.config.*;
 
 @Configuration
 public class BeetlConfig {

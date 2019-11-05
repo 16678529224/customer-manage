@@ -2,6 +2,7 @@ server:
      port: 9998
 # beetl:模板引擎
 beetl:
+
   templatesPath: /templates/
 
 #静态资源
@@ -59,14 +60,43 @@ spring:
       #    deny: 127.0.0.1 #黑名单
 
 #mybatis数据库框架配置
-mybatis:
-
+#mybatis:
   #不用这样resultType="com.yuanpeng.domain.User"  直接写class名自动扫描
-  type-aliases-package: com.yuanpeng.domain
+  #type-aliases-package: com.yuanpeng.domain
   # 指定全局配置文件位置
-  config-location: classpath:mybatis/mybatis-config.xml
+  #config-location: classpath:mybatis/mybatis-config.xml
   # 指定sql映射文件位置
-  mapper-locations: classpath:mybatis/mapper/*.xml
+  #mapper-locations: classpath:mybatis/mapper/*.xml
+
+mybatis-plus:
+  mapper-locations: classpath:mybatis/mapper/*Mapper.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.yuanpeng.domain
+  global-config:
+    db-config:
+      id-type: uuid
+      #非null验证
+      field-strategy: not_null
+      #驼峰下划线转换
+      table-underline: true
+
+    #刷新mapper 调试神器
+    #refresh-mapper: true
+    #数据库大写下划线转换
+    #capital-mode: true
+    # Sequence序列接口实现类配置
+    #key-generator: com.baomidou.mybatisplus.incrementer.OracleKeyGenerator
+    #逻辑删除配置（下面3个配置）
+    #logic-delete-value: 1
+    #logic-not-delete-value: 0
+    #sql-injector: com.baomidou.mybatisplus.mapper.LogicSqlInjector
+    #自定义填充策略接口实现
+    #meta-object-handler: com.baomidou.springboot.MyMetaObjectHandler
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    #配置JdbcTypeForNull
+    jdbc-type-for-null: 'null'
 
 #SpringBoot底层也是使用slf4j+logback的方式进行日志记录
 #日志配置 org.springframework.boot.logging.logback   有配置文件这里配置无用
