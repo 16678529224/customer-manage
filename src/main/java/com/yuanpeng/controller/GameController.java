@@ -10,9 +10,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("game")
 public class GameController {
     @GetMapping("/rain")
-    public void consoleIndex(Model model){
-        //Run->Edit Configurations/config/VM
+    public void rainIndex(Model model){
+        //Run->Edit Configurations/config/VM -Djava.awt.headless=false
         //更改虚拟机
         new Rain();
+    }
+    @GetMapping("/shu")
+    public String shuIndex(Model model){
+
+        return "game/shu/index";
+    }
+    @GetMapping("/heidong")
+    public String heidongIndex(Model model){
+
+        return "game/heidong/index";
     }
 }
