@@ -1,57 +1,31 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yuanpeng.mapper.SysUserMapper">
-    <!--<sql id="allColums">
-		yp_sys_user.id as id,
-		yp_sys_user.username as username,
-		yp_sys_user.password as password,
-		yp_sys_user.mobile as mobile,
-		yp_sys_user.salt as salt,
-		yp_sys_user.dept_id as deptId,
-		yp_sys_user.status as status,
-		yp_sys_user.created_at as createdAt,
-		yp_sys_user.updated_at as updatedAt,
-		yp_sys_user.del_flag as delFlag
-	</sql>-->
-    <!--<include refid="allColums"/>-->
-    <resultMap id="baseModel" type="com.yuanpeng.domain.SysUser">
-        <id column="id" property="id"/>
-        <result column="username" property="username"/>
-        <result column="password" property="password"/>
-        <result column="mobile" property="mobile"/>
-        <result column="salt" property="salt"/>
-        <result column="status" property="status"/>
-        <result column="create_time" property="createTime"/>
-        <result column="update_time" property="updateTime"/>
-        <result column="del_flag" property="delFlag"/>
-        <result column="nickname" property="nickname"/>
 
+    <!-- 开启二级缓存 -->
+    <!--<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>-->
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.yuanpeng.domain.SysUser">
+        <id column="id" property="id" />
+        <result column="username" property="username" />
+        <result column="password" property="password" />
+        <result column="mobile" property="mobile" />
+        <result column="salt" property="salt" />
+        <result column="status" property="status" />
+        <result column="create_time" property="createTime" />
+        <result column="del_flag" property="delFlag" />
+        <result column="update_time" property="updateTime" />
+        <result column="nickname" property="nickname" />
     </resultMap>
-    <!--
-    字段注释:
-            id
-            username         : 用户名
-            password         : 密码
-            mobile           : 手机号
-            salt             : 盐值
-            dept_id          : 所属部门
-            status           : 状态(0:锁定 1:正常)
-            created_at
-            updated_at
-            del_flag
-    -->
-   <!-- <insert id="insertSysUser" parameterType="com.yuanpeng.domain.SysUser"
-            useGeneratedKeys="true" keyProperty="id" >-->
-        <!-- oracle等不支持id自增长的，可根据其id生成策略，先获取id
 
-     <selectKey resultType="int" order="BEFORE" keyProperty="id">
-           select seq_user_id.nextval as id from dual
-     </selectKey>
-     -->
-
-    <insert id="insertSysUser" parameterType="SysUser">
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, username, password, mobile, salt, status, create_time, del_flag, update_time, nickname
+    </sql>
+	
+	
+	<insert id="insertSysUser" parameterType="com.yuanpeng.domain.SysUser">
        insert into yp_sys_user(
         id,
        username,
@@ -75,7 +49,7 @@
         0,
         #{nickname}
         )
-        
+
     </insert>
     <select id="selcetMobileBySysUserNum" parameterType="java.lang.String" resultType="java.lang.Integer">
         select count(*)
@@ -87,16 +61,15 @@
         from   yp_sys_user
         where  username=#{username}
     </select>
-    <select id="contrastMobile" resultMap="baseModel">
+    <select id="contrastMobile" resultMap="BaseResultMap">
         select *
         from yp_sys_user
         where mobile = #{mobile}
     </select>
 
-    <select id="contrastUserName" resultMap="baseModel">
+    <select id="contrastUserName" resultMap="BaseResultMap">
         select *
         from yp_sys_user
         where username = #{username}
     </select>
-
 </mapper>

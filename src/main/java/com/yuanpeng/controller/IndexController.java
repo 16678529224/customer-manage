@@ -1,5 +1,6 @@
 package com.yuanpeng.controller;
 
+import com.yuanpeng.BuilderJava.ToolUtils;
 import com.yuanpeng.domain.SysUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,8 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 public class IndexController {
     @GetMapping("/index")
     public String index(Model model, HttpServletRequest request){
-        SysUser user = (SysUser)request.getSession().getAttribute("loginUser");
-        model.addAttribute("loginName","阿萨德");
+        SysUser user = ToolUtils.getUser();
+        model.addAttribute("loginName",user.getNickname());
         return "index/index";
     }
 }

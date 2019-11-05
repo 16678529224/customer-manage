@@ -1,54 +1,66 @@
 package com.yuanpeng.domain;
 
-import com.yuanpeng.BuilderJava.BaseEntity;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.enums.IdType;
+import com.baomidou.mybatisplus.activerecord.Model;
+import com.baomidou.mybatisplus.annotations.TableName;
+import java.io.Serializable;
 
-//@TableName("lmt_sys_user")
-public class SysUser extends BaseEntity
-{
-	private static final long serialVersionUID = 1L;
+/**
+ * <p>
+ * 用户表
+ * </p>
+ *
+ * @author yuanpeng
+ * @since 2019-11-05
+ */
+@TableName("yp_sys_user")
+public class SysUser extends Model<SysUser> {
 
-	//@TableId(value = "id", type = IdType.AUTO)
-	private String id;
-	private String username;//用户名
-	private String password;//密码
-	private String mobile;//手机号
-	private String salt;//盐值
-    private String nickname;//昵称
+    private static final long serialVersionUID = 1L;
 
-	private Integer status;//状态(0:正常 1:锁定)
-	//@TableField(value = "created_at", fill = FieldFill.INSERT) //创建时间
-	private String createTime;
-	//@TableField(value = "updated_at", fill = FieldFill.UPDATE) //最后更新时间
-	private String updateTime;
-	//@TableLogic //逻辑删除标记(0 未删除 1 已删除)
-	//@TableField("del_flag")
-	private Integer delFlag;//逻辑删除标记(0 未删除 1 已删除) 
+    /**
+     * 用户id
+     */
+    @TableId(value = "id", type = IdType.INPUT)
+    private String id;
+    /**
+     * 用户登录名
+     */
+    private String username;
+    /**
+     * 用户密码
+     */
+    private String password;
+    /**
+     * 手机号
+     */
+    private String mobile;
+    /**
+     * 盐值
+     */
+    private String salt;
+    /**
+     * 状态(0:正常 1:锁定)
+     */
+    private Integer status;
+    /**
+     * 创建时间
+     */
+    private String createTime;
+    /**
+     * 逻辑删除标记(0 未删除 1 已删除)
+     */
+    private Integer delFlag;
+    /**
+     * 修改时间
+     */
+    private String updateTime;
+    /**
+     * 昵称
+     */
+    private String nickname;
 
-	//@TableField(exist = false)
-	//private List<SysRole> roles;
-
-	//@TableField(exist = false)
-	//private List<SysResource> resources;
-
-	//@TableField(exist = false)
-	//private String deptName;
-	//@TableField(exist = false)
-	//private String num;
-
-	/**
-	 * 用户状态
-	 */
-	public interface SysUserStatus
-	{
-		/**
-		 * 锁定
-		 */
-		Integer LOCKED = 0;
-		/**
-		 * 正常
-		 */
-		Integer NORMAL = 1;
-	}
 
     public String getId() {
         return id;
@@ -90,8 +102,6 @@ public class SysUser extends BaseEntity
         this.salt = salt;
     }
 
-
-
     public Integer getStatus() {
         return status;
     }
@@ -108,6 +118,14 @@ public class SysUser extends BaseEntity
         this.createTime = createTime;
     }
 
+    public Integer getDelFlag() {
+        return delFlag;
+    }
+
+    public void setDelFlag(Integer delFlag) {
+        this.delFlag = delFlag;
+    }
+
     public String getUpdateTime() {
         return updateTime;
     }
@@ -116,18 +134,32 @@ public class SysUser extends BaseEntity
         this.updateTime = updateTime;
     }
 
-    public Integer getDelFlag() {
-        return delFlag;
-    }
-
-    public void setDelFlag(Integer delFlag) {
-        this.delFlag = delFlag;
-    }
     public String getNickname() {
         return nickname;
     }
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    @Override
+    protected Serializable pkVal() {
+        return this.id;
+    }
+
+    @Override
+    public String toString() {
+        return "SysUser{" +
+        ", id=" + id +
+        ", username=" + username +
+        ", password=" + password +
+        ", mobile=" + mobile +
+        ", salt=" + salt +
+        ", status=" + status +
+        ", createTime=" + createTime +
+        ", delFlag=" + delFlag +
+        ", updateTime=" + updateTime +
+        ", nickname=" + nickname +
+        "}";
     }
 }

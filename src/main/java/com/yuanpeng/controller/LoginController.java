@@ -2,7 +2,6 @@ package com.yuanpeng.controller;
 
 import com.yuanpeng.BuilderJava.*;
 import com.yuanpeng.domain.SysUser;
-import com.yuanpeng.domain.User;
 import com.yuanpeng.service.SysUserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -22,10 +21,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.net.InetAddress;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-import java.util.UUID;
 
 @Controller
 @RequestMapping("login")

@@ -16,6 +16,11 @@ public class GenerateMybatisPlus {
 
 
     public static void main(String[] args) {
+        Generate("yp_sys_user");//多个用,
+    }
+
+
+    public static void Generate(String str) {
         //1. 全局配置
         GlobalConfig config;
         config = new GlobalConfig();
@@ -43,18 +48,18 @@ public class GenerateMybatisPlus {
                 .setDbColumnUnderline(true)  // 指定表名 字段名是否使用下划线
                 .setNaming(NamingStrategy.underline_to_camel) // 数据库表映射到实体的命名策略
                 .setTablePrefix("yp_")//表名前缀
-                .setInclude("yp_sys_role");  // 生成的表
+                .setInclude(str);  // 生成的表
 
         //4. 包名策略配置
         PackageConfig pkConfig = new PackageConfig();
-        pkConfig.setParent("com.yuanpeng")
+        pkConfig.setParent("com.yuanpeng.zGouzaoqi")
                 .setMapper("mapper")
                 .setService("service")
                 .setController("controller")
                 .setEntity("domain")
-                .setXml("../../resources/mybatis/mapper")
+                .setXml("mybatis/mapper")
                 .setServiceImpl("serviceImpl")
-                ;
+        ;
 
         //5. 整合配置
         AutoGenerator ag = new AutoGenerator();
@@ -67,7 +72,5 @@ public class GenerateMybatisPlus {
         //6. 执行
         ag.execute();
     }
-
-
 }
 
