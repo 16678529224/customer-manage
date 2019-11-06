@@ -42,7 +42,7 @@ public class UserRealm extends AuthorizingRealm {
         SysUser sysUser= (SysUser)Subject.getPrincipal();//SimpleAuthenticationInfo方法的第一个参数
 
         //添加资源的授权字符串
-        //info.addStringPermission("index:index");
+        info.addStringPermission("index:index");
 
         return info;
     }
