@@ -21,7 +21,10 @@ public class ToolUtils {
             return  uuid ;
         }
     }
-    //获取当前登陆ip
+    /**
+     * 获取当前登陆ip
+     */
+
     public  static  String getIp(){
         try {
             InetAddress addr = InetAddress.getLocalHost();
@@ -37,5 +40,15 @@ public class ToolUtils {
         Subject Subject = SecurityUtils.getSubject();
         SysUser sysUser= (SysUser)Subject.getPrincipal();//SimpleAuthenticationInfo方法的第一个参数
         return sysUser;
+    }
+    //用户编号填充
+    public  static String getUserCode(String str){
+        String num = "";
+        if(str.length()<6){
+            for (int i =0 ;i<5-str.length();i++){
+                num = num+"0";
+            }
+        }
+        return num+str;
     }
 }

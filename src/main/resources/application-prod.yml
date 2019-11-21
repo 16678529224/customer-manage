@@ -1,13 +1,17 @@
 server:
-     port: 9998
+  port: 9998
+###########手动配置自己使用的，配置文件使用的
 # beetl:模板引擎
 beetl:
+ templatesPath: /templates/
+  #静态资源
+  #constant:
+#language: {messages_CN: 汉语,messages_US: 英语}
 
-  templatesPath: /templates/
+################################################################################################################################
+###########系统配置
 
-#静态资源
-#constant:
-  #language: {messages_CN: 汉语,messages_US: 英语}
+
 # spring框架配置
 spring:
   #国际化配置文件夹
@@ -31,7 +35,7 @@ spring:
     druid:
       initial-size: 8  # 初始化大小
       min-idle: 3  # 最小
-      max-active: 20  # 最大
+      max-active: 50  # 最大
       max-wait: 60000  # 连接超时时间
       time-between-eviction-runs-millis: 60000  # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
       min-evictable-idle-time-millis: 300000  # 指定一个空闲连接最少空闲多久后可被清除，单位是毫秒
@@ -67,19 +71,20 @@ spring:
   #config-location: classpath:mybatis/mybatis-config.xml
   # 指定sql映射文件位置
   #mapper-locations: classpath:mybatis/mapper/*.xml
-
+# 物理分页和逻辑分页
 mybatis-plus:
   mapper-locations: classpath:mybatis/mapper/*Mapper.xml
   #实体扫描，多个package用逗号或者分号分隔
   typeAliasesPackage: com.yuanpeng.domain
   global-config:
-    db-config:
-      id-type: uuid
-      #非null验证
-      field-strategy: not_null
-      #驼峰下划线转换
-      table-underline: true
-
+    #驼峰下划线转换
+    db-column-underline: true
+    #用户输入id
+    id-type: 1
+    #非null判断 默认不更新为null的传参
+    field-strategy: 1
+    #是否动态刷新mapper
+    refresh-mapper: true
     #刷新mapper 调试神器
     #refresh-mapper: true
     #数据库大写下划线转换
@@ -92,37 +97,11 @@ mybatis-plus:
     #sql-injector: com.baomidou.mybatisplus.mapper.LogicSqlInjector
     #自定义填充策略接口实现
     #meta-object-handler: com.baomidou.springboot.MyMetaObjectHandler
+
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: false
     #配置JdbcTypeForNull
     jdbc-type-for-null: 'null'
-
-#SpringBoot底层也是使用slf4j+logback的方式进行日志记录
-#日志配置 org.springframework.boot.logging.logback   有配置文件这里配置无用
-logging:
-  level:
-    org:
-#      mybatis: debug
- #   dao: debug
-    com:
-      yuanpeng:
-  #输出到文件:当前项目下生成springboot.log日志,不指定路径在当前项目下生成日志,可以指定具体路径:C:/springboot.log
-  file:
-  #在当前磁盘下的路径下创建spring文件夹和log文件夹,使用spring.log当做默认文件file与path冲突
-  #path: /spring/log
-  pattern:
-    #日志输出格式：
-      # %d表示日期时间，
-      # %thread表示线程名，
-      # %-5level：级别从左显示5个字符宽度
-      # %logger{50} 表示logger名字最长50个字符，否则按照句点分割。
-      # %msg：日志消息，
-      # %n是换行符
-    #在控制台输出的日志格式
-    console: ' %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n'
-    #在指定文件中输出日志的格式
-    #file: '%d{HH:mm:ss.SSS} %contextName [%thread] %-5level %logger{36} - %msg%n'
-
 
 

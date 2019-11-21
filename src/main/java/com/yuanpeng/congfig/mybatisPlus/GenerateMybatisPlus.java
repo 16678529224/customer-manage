@@ -1,4 +1,3 @@
-
 package com.yuanpeng.congfig.mybatisPlus;
 
 
@@ -11,6 +10,9 @@ import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import com.baomidou.mybatisplus.generator.config.rules.DbType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 
+/**
+ * 这个是代码生成模块2,单独使用的不用启动项目
+ */
 public class GenerateMybatisPlus {
 
 
@@ -26,7 +28,8 @@ public class GenerateMybatisPlus {
         config = new GlobalConfig();
         config.setActiveRecord(true) // 是否支持AR模式  实体类继承modul
                 .setAuthor("yuanpeng") // 作者
-                .setOutputDir("E:\\IDEAWork\\Two\\customer-manage\\src\\main\\java") // 生成路径
+                //.setOutputDir("E:\\IDEAWork\\Two\\customer-manage\\src\\main\\java") // 生成路径
+                .setOutputDir("E:\\linshi") // 生成路径
                 .setFileOverride(true)  // 文件覆盖
                 .setIdType(IdType.INPUT) // 主键策略
                 .setServiceName("%sService")  // 设置生成的service接口的名字的首字母是否为I

@@ -8,20 +8,25 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.yuanpeng.domain.SysUser">
         <id column="id" property="id" />
+        <result column="usercode" property="usercode" />
         <result column="username" property="username" />
+        <result column="nickname" property="nickname" />
         <result column="password" property="password" />
         <result column="mobile" property="mobile" />
         <result column="salt" property="salt" />
         <result column="status" property="status" />
-        <result column="create_time" property="createTime" />
         <result column="del_flag" property="delFlag" />
+        <result column="create_time" property="createTime" />
         <result column="update_time" property="updateTime" />
-        <result column="nickname" property="nickname" />
+        <result column="avatar" property="avatar" />
+        <result column="email" property="email" />
+        <result column="sex" property="sex" />
+        <result column="ip" property="ip" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, username, password, mobile, salt, status, create_time, del_flag, update_time, nickname
+        id, usercode, username, nickname, password, mobile, salt, status, del_flag, create_time, update_time, avatar, email, sex, ip
     </sql>
 	
 	

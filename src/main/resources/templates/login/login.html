@@ -114,8 +114,12 @@
     ,search = router.search;
 
     form.render();
-
-    //提交
+    $(document).keypress(function (e){
+        if (e.keyCode == 13) {
+            login()
+        }
+    })
+      //提交
   /*  form.on('submit(LAY-user-login-submit)', function(obj){
     
       //请求登入接口

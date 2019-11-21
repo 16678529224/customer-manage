@@ -373,7 +373,9 @@ a cite {
 .layui-icon-username:before {
     content: "\e66f"
 }
-
+.layui-icon-email:before {
+    content: "\e7ae"
+}
 .layui-icon-find-fill:before {
     content: "\e670"
 }

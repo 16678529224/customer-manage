@@ -23,6 +23,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.Date;
 
 @Controller
 @RequestMapping("login")
@@ -153,6 +154,8 @@ public class LoginController {
             String ciphertext = PasswordEncryption.getEncryptedPassword(password, salt);//密文
             sysUser.setSalt(salt);
             sysUser.setPassword(ciphertext);
+            sysUser.setCreateTime(TimeUtil.dateFormat(new Date()));
+            sysUser.setIp(ToolUtils.getIp());
             Res res = sysUserService.saveSysUser(sysUser);
             logger.debug("username=="+usename+"--------salt=="+salt+"--------ciphertext=="+ciphertext);
             return res;

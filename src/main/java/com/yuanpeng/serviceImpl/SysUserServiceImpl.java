@@ -1,9 +1,11 @@
 package com.yuanpeng.serviceImpl;
 
+import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.yuanpeng.BuilderJava.PasswordEncryption;
 import com.yuanpeng.BuilderJava.Res;
 import com.yuanpeng.BuilderJava.ResultCode;
+import com.yuanpeng.BuilderJava.ReturnPage;
 import com.yuanpeng.domain.SysUser;
 import com.yuanpeng.mapper.SysUserMapper;
 import com.yuanpeng.service.SysUserService;
@@ -15,6 +17,9 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.servlet.http.HttpServletRequest;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.sql.Wrapper;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -37,7 +42,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 		sysUser.setMobile(str);
 		sysUser = this.baseMapper.contrastMobile(sysUser);
 		return sysUser;
-		
+
 	}
     @Override
     @Transactional
@@ -50,7 +55,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         if(byUserNameNum!=0){
             return new Res(ResultCode.LOGIN_REG_USERNAME);
         }
-        Integer insertNum = this.baseMapper.insertSysUser(sysUser);
+        Integer insertNum = this.baseMapper.insert(sysUser);
         if(insertNum==0){
             return new Res(ResultCode.LOGIN_REG_ERROR);
         }
@@ -77,5 +82,12 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         }
         return new Res(ResultCode.FAILED);
 
+    }
+    @Override
+    public ReturnPage selUserListPage(Page<SysUser> page){
+
+        List<SysUser> list  =  this.baseMapper.selectPage(page,null);
+        logger.debug(new ReturnPage(list,page).toString());
+        return new ReturnPage(list,page);
     }
 }

@@ -6,6 +6,8 @@ import com.yuanpeng.domain.SysUser;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * <p>
  * 用户表 Mapper 接口
@@ -17,7 +19,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 @Mapper
 public interface SysUserMapper extends BaseMapper<SysUser> {
-//创建用户
+    //创建用户
     Integer insertSysUser(SysUser sysUser);
     //根据手机号查有几个用户
     Integer selcetMobileBySysUserNum(String mobile);
@@ -27,4 +29,6 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
 	SysUser contrastMobile(SysUser sysUser);
     //根据用户名查用户
     SysUser contrastUserName(String username);
+    //查询所有用户信息,分页
+
 }
