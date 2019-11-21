@@ -621,7 +621,10 @@ a cite {
 }
 
 .layui-icon-user:before {
-    content: "\e770"
+     content: "\e770"
+ }
+.layui-icon-game:before {
+    content: "\e62e"
 }
 
 .layui-icon-notice:before {

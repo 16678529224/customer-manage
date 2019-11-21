@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.util.ArrayList;
-/* lay-href="   lay-href="*[ctxPath]/model/
-*.html
+/* controller  lay-href="   lay-href="*[ctxPath]/model/
+*   .html
 *../../../layuiadmin/
 * *[ctxPath]/
 *

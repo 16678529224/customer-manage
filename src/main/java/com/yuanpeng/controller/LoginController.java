@@ -146,7 +146,6 @@ public class LoginController {
         BASE64Decoder decoder = new BASE64Decoder();
 
         try {
-            sysUser.setId(ToolUtils.getUuid());
             String usename = new String(decoder.decodeBuffer(sysUser.getUsername()), "UTF-8");
             sysUser.setUsername(usename);
             String password = new String(decoder.decodeBuffer(sysUser.getPassword()), "UTF-8");

@@ -59,8 +59,6 @@ public class SysUserController {
         //returnPage.getLimit();
         //logger.debug(sysUser.getPage()+"");
         ReturnPage retpage  = sysUserService.selUserListPage(page);
-
-
         return retpage;
     }
 
@@ -85,19 +83,7 @@ public class SysUserController {
         return "user/administrators/list";
     }
 
-    /**
-     * 角色管理
-     * @param model
-     * @param request
-     * @return
-     */
-    @GetMapping("/administrators/role/index")
-    public String administratorsRole(Model model, HttpServletRequest request){
-        return "user/administrators/role";
-    }
-    @GetMapping("/administrators/roleform/index")
-    public String administratorsRoleform(Model model, HttpServletRequest request){
-        return "user/administrators/roleform";
-    }
+
+
 }
 

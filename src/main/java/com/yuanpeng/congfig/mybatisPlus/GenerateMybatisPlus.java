@@ -18,18 +18,18 @@ public class GenerateMybatisPlus {
 
 
     public static void main(String[] args) {
-        Generate("yp_sys_user");//多个用,
+        Generate("E:\\IDEAWork\\Two\\customer-manage\\src\\main\\java","yp_sys_role");//url生成文件路径 str表明多个用,
     }
 
 
-    public static void Generate(String str) {
+    public static void Generate(String url ,String str) {
         //1. 全局配置
         GlobalConfig config;
         config = new GlobalConfig();
         config.setActiveRecord(true) // 是否支持AR模式  实体类继承modul
                 .setAuthor("yuanpeng") // 作者
-                //.setOutputDir("E:\\IDEAWork\\Two\\customer-manage\\src\\main\\java") // 生成路径
-                .setOutputDir("E:\\linshi") // 生成路径
+                .setOutputDir(url) // 生成路径
+                //.setOutputDir("E:\\linshi") // 生成路径
                 .setFileOverride(true)  // 文件覆盖
                 .setIdType(IdType.INPUT) // 主键策略
                 .setServiceName("%sService")  // 设置生成的service接口的名字的首字母是否为I
