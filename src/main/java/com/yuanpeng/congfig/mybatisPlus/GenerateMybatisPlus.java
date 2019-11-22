@@ -18,7 +18,7 @@ public class GenerateMybatisPlus {
 
 
     public static void main(String[] args) {
-        Generate("E:\\IDEAWork\\Two\\customer-manage\\src\\main\\java","yp_sys_role");//url生成文件路径 str表明多个用,
+        Generate("E:\\IDEAWork\\Two\\customer-manage\\src\\main\\java","yp_sys_dictionary");//url生成文件路径 str表明多个用,
     }
 
 
