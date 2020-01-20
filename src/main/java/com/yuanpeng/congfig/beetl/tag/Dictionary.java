@@ -8,6 +8,16 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+/**
+ * 此类为beetl下拉选字典专用
+ *attr 添加要查询变量  这个字段dictionary_type
+ *  <select name="rolename" lay-filter="LAY-user-adminrole-type">
+ *               <#dictionary attr="sex" ; value>
+ *               *[value]
+ *               </#dictionary>
+ *  </select>
+ */
 public class Dictionary extends GeneralVarTagBinding {
     private final static Logger logger = LoggerFactory.getLogger(Dictionary.class);
 

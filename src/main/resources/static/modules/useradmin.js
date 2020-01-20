@@ -170,16 +170,31 @@ layui.define(['table', 'form'], function(exports){
 
   //角色管理
   table.render({
-    elem: '#LAY-user-back-role'
-    ,url: layui.setter.base + 'json/useradmin/role.js' //模拟接口
+    elem: '#LAY-user-back-role',
+      id: 'roleTable'
+    ,url: layui.setter.base + 'sysRole/selRoleListPage'          // layui.setter.base + 'json/useradmin/role.js' //模拟接口
     ,cols: [[
       {type: 'checkbox', fixed: 'left'}
-      ,{field: 'id', width: 80, title: 'ID', sort: true}
-      ,{field: 'rolename', title: '角色名'}
-      ,{field: 'limits', title: '拥有权限'}
-      ,{field: 'descr', title: '具体描述'}
-      ,{title: '操作', width: 150, align: 'center', fixed: 'right', toolbar: '#table-useradmin-admin'}
+      /*,{field: 'id', width: 80, title: 'ID', sort: true}*/
+      ,{field: 'name', title: '角色名',width:'15%'}
+     /* ,{field: 'limits', title: '拥有权限'}*/
+      ,{field: 'description', title: '具体描述',width:'45%'}
+      ,{
+          field: 'status', title: '状态', templet: function (d) {
+              if(d.status==0){
+                  return "正常";
+              }else{
+                  return "锁定";
+              }
+
+              /*return util.toDateString(d.createTime);*/
+          }, width: '10%'
+      }
+      ,{title: '操作', width: 150, align: 'center', fixed: 'right', toolbar: '#table-useradmin-admin',width:'30%'}
     ]]
+      ,page: true
+      ,limit: 30
+      ,height: 'full-220'
     ,text: '对不起，加载出现异常！'
   });
   
@@ -188,6 +203,18 @@ layui.define(['table', 'form'], function(exports){
     var data = obj.data;
     if(obj.event === 'del'){
       layer.confirm('确定删除此角色？', function(index){
+          lmt.del({
+              url: layui.setter.base  + 'sysRole/remove/'+obj.data.id,
+              data: {},
+              success: function (data) {
+                  if (data.code == 100) {
+                      layer.msg('成功', {icon: 1});
+                  } else {
+                  }
+              }
+          })
+
+
         obj.del();
         layer.close(index);
       });
@@ -197,7 +224,7 @@ layui.define(['table', 'form'], function(exports){
       layer.open({
         type: 2
         ,title: '编辑角色'
-        ,content: '../../../views/user/administrators/roleform.html'
+        ,content: layui.setter.base + 'sysRole/roleform/index'
         ,area: ['500px', '480px']
         ,btn: ['确定', '取消']
         ,yes: function(index, layero){
@@ -221,7 +248,45 @@ layui.define(['table', 'form'], function(exports){
         }
       })
     }
-  });
 
+  });
+    //角色管理 tabletree
+  /*table.render({
+      elem: '#LAY-user-back-permission'
+      ,url: layui.setter.base + 'sysPermission/selPermissionListPage'//url: layui.setter.base + 'json/useradmin/role.js' //模拟接口
+      ,cols: [[
+          {type: 'checkbox', fixed: 'left'}
+          ,{field: 'id', width: 80, title: 'ID', sort: true,hide:true}
+          ,{field: 'perms', title: '权限标识'}
+          ,{field: 'name', title: '权限名称'}
+          ,{field: 'createTime', title: '添加时间',sort: true}
+          ,{field: 'description', title: '具体描述'}
+          ,{field: 'type', title: '状态', width: 65
+              ,templet:function (d) {
+                  var type = d.type;
+                  if(type == 0){
+                      return "页面";
+                  }else{
+                      return "按钮";
+                  }
+              }
+          }
+          ,{field: 'status', title: '状态', width: 65
+              ,templet:function (d) {
+                  var status = d.status;
+                  if(status == 0){
+                      return "正常";
+                  }else{
+                      return "锁定";
+                  }
+              }
+          }
+          ,{title: '操作', width: 150, align: 'center', fixed: 'right', toolbar: '#table-useradmin-admin'}
+      ]]
+      ,page: true
+      ,limit: 30
+      ,height: 'full-220'
+      ,text: '对不起，加载出现异常！'
+  });*/
   exports('useradmin', {})
 });

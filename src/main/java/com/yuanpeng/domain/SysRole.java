@@ -1,11 +1,11 @@
 package com.yuanpeng.domain;
 
+
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.enums.IdType;
-import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
-import java.io.Serializable;
+import com.baomidou.mybatisplus.enums.FieldFill;
+import com.baomidou.mybatisplus.enums.IdType;
 
 /**
  * <p>
@@ -16,7 +16,7 @@ import java.io.Serializable;
  * @since 2019-11-21
  */
 @TableName("yp_sys_role")
-public class SysRole extends utilDomain implements Serializable {
+public class SysRole extends utilDomain  {
 
     private static final long serialVersionUID = 1L;
 
@@ -33,11 +33,14 @@ public class SysRole extends utilDomain implements Serializable {
     /**
      * 创建时间yyyy-MM-dd HH:mm:ss
      */
+    @TableField(fill = FieldFill.INSERT)
     private String createTime;
     /**
      * 创建用户ID
      */
-    @TableField("create_userId")
+
+   // @TableField("create_userId")
+    @TableField(fill = FieldFill.INSERT)
     private String createUserid;
     /**
      * 更新时间yyyy-MM-dd HH:mm:ss

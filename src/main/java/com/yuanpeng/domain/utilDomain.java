@@ -2,7 +2,9 @@ package com.yuanpeng.domain;
 
 import com.baomidou.mybatisplus.annotations.TableField;
 
-public class  utilDomain {
+import java.io.Serializable;
+
+public class  utilDomain implements Serializable {
     @TableField(exist = false)
     private Integer page ;//页数
     @TableField(exist = false)

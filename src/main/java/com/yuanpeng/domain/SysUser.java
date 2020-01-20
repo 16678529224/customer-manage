@@ -20,7 +20,7 @@ import java.io.Serializable;
  * 他可以自己插入自己        sysUser.insert();
  */
 @TableName("yp_sys_user")
-public class SysUser extends utilDomain implements Serializable{
+public class SysUser extends utilDomain {
 
     private static final long serialVersionUID = 1L;
 

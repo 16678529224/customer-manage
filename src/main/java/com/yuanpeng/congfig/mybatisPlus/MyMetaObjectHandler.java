@@ -1,5 +1,6 @@
 package com.yuanpeng.congfig.mybatisPlus;
 
+
 import com.baomidou.mybatisplus.mapper.MetaObjectHandler;
 import com.yuanpeng.BuilderJava.TimeUtil;
 import com.yuanpeng.BuilderJava.ToolUtils;
@@ -12,8 +13,11 @@ public class MyMetaObjectHandler extends MetaObjectHandler {
     //新建插入公共字段
     @Override
     public void insertFill(MetaObject metaObject) {
-        metaObject.setValue("createTime", TimeUtil.dateFormat(new Date()));
+
         metaObject.setValue("id", ToolUtils.getUuid());
+        metaObject.setValue("createTime", TimeUtil.dateFormat(new Date()));
+        metaObject.setValue("createUserid", ToolUtils.getUser().getId()
+		);
     }
     //更新插入公共字段
     @Override

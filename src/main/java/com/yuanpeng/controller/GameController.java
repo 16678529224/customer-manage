@@ -25,4 +25,9 @@ public class GameController {
 
         return "game/heidong/index";
     }
+    @GetMapping("/test")
+    public String testIndex(Model model){
+
+        return "user/administrators/async";
+    }
 }

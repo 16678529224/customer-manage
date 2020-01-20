@@ -58,8 +58,9 @@
       </div>
     </div>
   </div>
-
- <script src="*[ctxPath]/layui/layui.js"></script>  
+  <script type="text/javascript" src="*[ctxPath]/modules/lmt.js"></script>
+  <script src="*[ctxPath]/layui/layui.js"></script>
+  <script type="text/javascript" src="*[ctxPath]/modules/jquery.min.js"></script>
   <script>
   layui.config({
     base: '*[ctxPath]/' //静态资源所在路径
@@ -117,10 +118,29 @@
             //监听提交
             iframeWindow.layui.form.on('submit(LAY-user-role-submit)', function(data){
               var field = data.field; //获取提交的字段
-              
+              lmt.post({
+                    url: '*[ctxPath]/sysRole/saveSysRole',
+                    data:{"name":field.name,"description":field.description},
+                    success:function(data){
+                        if(data.code == 100){
+                            /*layer.msg('登录成功!', {
+                                offset: '15px'
+                                ,icon: 1
+                                ,time: 1000
+                            }, function(){
+                                location.href = '*[ctxPath]/index/index'; //跳转到登入页
+                            });*/
+                        }else{
+
+                        }
+
+                    }
+			  })
               //提交 Ajax 成功后，静态更新表格中的数据
-              //$.ajax({});              
-              table.reload('LAY-user-back-role');
+              //$.ajax({});
+                setTimeout(function () {  // 故意延迟一下
+                }, 1000);
+              table.reload('roleTable');
               layer.close(index); //关闭弹层
             });  
             
